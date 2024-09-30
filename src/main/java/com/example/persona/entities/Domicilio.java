@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "domicilio")
@@ -12,15 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Domicilio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Audited
+
+public class Domicilio extends Base  {
+
 
     private String calle;
     private String numero;
 
-    @ManyToOne
-    @JoinColumn(name = "localidad_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "fk_localidad")
     private Localidad localidad;
 }

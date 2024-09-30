@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "localidad")
@@ -12,10 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Localidad {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Audited
 
-    private String nombre;
+public class Localidad extends Base {
+
+
+    private String denominacion;
 }

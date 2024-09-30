@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
+
+import java.util.List;
 
 @Entity
 @Table(name = "libro")
@@ -12,16 +15,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Libro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Audited
+
+public class Libro extends Base  {
+
 
     private String titulo;
-
+    private int fecha;
     private String genero;
+    private int paginas;
 
-    @ManyToOne
-    @JoinColumn(name = "autor_id", referencedColumnName = "id")
-    private Autor autor;
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    private List<Autor> autores;
 }
